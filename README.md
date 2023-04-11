@@ -1,5 +1,3 @@
-<a name="readme-top">School-Library</a>
-
 # 📗 Table of Contents
 
 - [📖 About the Project](#about-project)
