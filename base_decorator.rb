@@ -1,6 +1,6 @@
 require_relative './nameable.rb'
 
-class Basedecorator
+class BaseDecorator
     def initialize(nameable)
         @nameable = nameable
     end
