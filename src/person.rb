@@ -26,6 +26,7 @@ class Person < Nameable
 
   def rent_book
     @rentals.push(rental)
+  end
 
   private
 
