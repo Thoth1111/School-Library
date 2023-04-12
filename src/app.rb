@@ -14,11 +14,11 @@ class App
   end
 
   def list_books
-    @books.each { |book| puts book }
+    books.each { |book| puts book }
   end
 
   def list_persons
-    @persons.each { |person| puts person }
+    persons.each { |person| puts person }
   end
 
   def create_person
@@ -39,7 +39,7 @@ class App
     else
       puts 'Invalid type selection (parent/student)'
     end
-    @persons.push(person)
+    persons.push(person)
     puts 'Person created successfully'
   end
 
@@ -49,7 +49,30 @@ class App
     puts 'Author:'
     author = gets.chomp
     book = Book.new(title, author)
-    @books.push(book)
+    books.push(book)
     puts 'Book created successfully'
+  end
+
+  def create_rental
+    puts 'select a book from the following list by number:'
+    books.each_with_index do |_book, _index|
+      puts "{#{index}) Title: \"#{title}\", Author: #{author}}"
+    end
+    bk_index = gets.chomp
+    rented_book = books[bk_index]
+    puts 'select a person from the following list by number (not id)'
+    persons.each_with_index do |person, _index|
+      if person.is_a?(Teacher)
+        puts "#{index}) [Teacher] Name: #{name}, ID: #{id}, Age: #{age}"
+      elsif person.is_a?(Student)
+        puts "#{index}) [Student] Name: #{name}, ID: #{id}, Age: #{age}"
+      end
+    end
+    person_index = gets.chomp
+    renting_person = persons[person_index]
+    puts 'Date:'
+    date = gets.chomp
+    rentals.push(date, rented_book, renting_person)
+    puts 'Rental created successfully'
   end
 end
