@@ -1,13 +1,14 @@
 require_relative './book'
 
 class Rental
-    attr_accessor :date, :book
+    attr_reader :book, :person
+    attr_accessor :date
 
-    def initialize(date)
+    def initialize(date, book, person)
         @date = date
-    end
-
-    def book = (book)
         @book = book
-        book.rentals.push(self) unless book.include?(self)
+        book.rentals.push(self)
+        @person = person
+        person.rentals.push(self)
+    end
 end
