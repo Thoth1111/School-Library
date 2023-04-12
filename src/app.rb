@@ -32,6 +32,16 @@ class App
       puts 'Invalid type selection (parent/student)'
     end
     @persons.push(person)
-    puts 'person created successfully'
+    puts 'Person created successfully'
+  end
+
+  def create_book
+    puts 'Title:'
+    title = gets.chomp
+    puts 'Author:'
+    author = gets.chomp
+    book = Book.new(title, author)
+    @books.push(book)
+    puts 'Book created successfully'
   end
 end
