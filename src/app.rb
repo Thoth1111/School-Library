@@ -14,11 +14,17 @@ class App
   end
 
   def list_books
-    books.each { |book| puts book }
+    books.each { |_book| puts "Title: \"#{title}\", Author: #{author}" }
   end
 
   def list_persons
-    persons.each { |person| puts person }
+    persons.each do |person|
+      if person.is_a?(Teacher)
+        puts "[Teacher] Name: #{name}, ID: #{id}, Age: #{age}"
+      elsif person.is_a?(Student)
+        puts "[Student] Name: #{name}, ID: #{id}, Age: #{age}"
+      end
+    end
   end
 
   def create_person
@@ -56,7 +62,7 @@ class App
   def create_rental
     puts 'select a book from the following list by number:'
     books.each_with_index do |_book, _index|
-      puts "{#{index}) Title: \"#{title}\", Author: #{author}}"
+      puts "#{index}) Title: \"#{title}\", Author: #{author}"
     end
     bk_index = gets.chomp
     rented_book = books[bk_index]
@@ -74,5 +80,18 @@ class App
     date = gets.chomp
     rentals.push(date, rented_book, renting_person)
     puts 'Rental created successfully'
+  end
+
+  def person_rentals
+    puts 'ID of person:'
+    renter_id = gets.chomp.to_i
+    rental_list = rentals.select { |rental| rental.person.id == renter_id }
+    if rental_list.empty?
+      puts 'No rentals found'
+    else
+      rental_list.each do |_rental|
+        puts "#{date}, Book: #{title}, by #{author}"
+      end
+    end
   end
 end
