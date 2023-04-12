@@ -13,6 +13,14 @@ class App
     @rentals = []
   end
 
+  def list_books
+    @books.each { |book| puts book }
+  end
+
+  def list_persons
+    @persons.each { |person| puts person }
+  end
+
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [input the number]:'
     type = gets.chomp
