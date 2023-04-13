@@ -1,5 +1,3 @@
-#!/c/Ruby32-x64/bin/ruby
-
 require_relative './src/app'
 
 def main
