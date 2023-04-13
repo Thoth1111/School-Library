@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 require_relative './src/app'
 
 def main
