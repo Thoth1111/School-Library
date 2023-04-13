@@ -1,8 +1,8 @@
-require_relative '.person/'
-require_relative '.student/'
-require_relative '.teacher/'
-require_relative '.book/'
-require_relative './rental'
+require_relative 'person'
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'book'
+require_relative 'rental'
 
 class App
   attr_accessor :persons, :books, :rentals
@@ -14,15 +14,23 @@ class App
   end
 
   def list_books
-    books.each { |_book| puts "Title: \"#{title}\", Author: #{author}" }
+    if @books.empty?
+      puts 'No books available'
+    else
+      @books.each { |_book| puts "Title: \"#{title}\", Author: #{author}" }
+    end
   end
 
   def list_persons
-    persons.each do |person|
-      if person.is_a?(Teacher)
-        puts "[Teacher] Name: #{name}, ID: #{id}, Age: #{age}"
-      elsif person.is_a?(Student)
-        puts "[Student] Name: #{name}, ID: #{id}, Age: #{age}"
+    if @persons.empty?
+      puts 'No one here'
+    else
+      @persons.each do |person|
+        if person.is_a?(Teacher)
+          puts "[Teacher] Name: #{name}, ID: #{id}, Age: #{age}"
+        elsif person.is_a?(Student)
+          puts "[Student] Name: #{name}, ID: #{id}, Age: #{age}"
+        end
       end
     end
   end
@@ -45,7 +53,7 @@ class App
     else
       puts 'Invalid type selection (parent/student)'
     end
-    persons.push(person)
+    @persons.push(person)
     puts 'Person created successfully'
   end
 
@@ -55,19 +63,19 @@ class App
     puts 'Author:'
     author = gets.chomp
     book = Book.new(title, author)
-    books.push(book)
+    @books.push(book)
     puts 'Book created successfully'
   end
 
   def create_rental
     puts 'select a book from the following list by number:'
-    books.each_with_index do |_book, _index|
+    @books.each_with_index do |_book, _index|
       puts "#{index}) Title: \"#{title}\", Author: #{author}"
     end
     bk_index = gets.chomp
     rented_book = books[bk_index]
     puts 'select a person from the following list by number (not id)'
-    persons.each_with_index do |person, _index|
+    @persons.each_with_index do |person, _index|
       if person.is_a?(Teacher)
         puts "#{index}) [Teacher] Name: #{name}, ID: #{id}, Age: #{age}"
       elsif person.is_a?(Student)
@@ -78,14 +86,14 @@ class App
     renting_person = persons[person_index]
     puts 'Date:'
     date = gets.chomp
-    rentals.push(date, rented_book, renting_person)
+    @rentals.push(date, rented_book, renting_person)
     puts 'Rental created successfully'
   end
 
   def person_rentals
     puts 'ID of person:'
     renter_id = gets.chomp.to_i
-    rental_list = rentals.select { |rental| rental.person.id == renter_id }
+    rental_list = @rentals.select { |rental| rental.person.id == renter_id }
     if rental_list.empty?
       puts 'No rentals found'
     else
