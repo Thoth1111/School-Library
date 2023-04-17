@@ -98,7 +98,7 @@ class App
     puts 'Date (YYYY-MM-DD):'
     date = gets.chomp
     if renter.can_use_services?
-      @rentas.push Rental.new(date, rented_book, renter)
+      @rentals.push Rental.new(date, rented_book, renter)
       puts 'Rental created successfully'
     else
       puts 'person lacks borrow permissions'
