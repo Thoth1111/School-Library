@@ -1,4 +1,5 @@
 require_relative './src/app'
+require_relative './src/selector'
 
 def main
   menu = 'Please choose an option by entering a number:
@@ -11,31 +12,13 @@ def main
     7 - Exit'
 
   app = App.new
+  selector = Selector.new(app)
   while menu
     puts menu
-    selected = gets.chomp.to_i
-    exit if selected == 7
+    option = gets.chomp.to_i
+    exit if option == 7
 
-    run(selected, app)
-  end
-end
-
-def run(selected, app)
-  case selected
-  when 1
-    app.list_books
-  when 2
-    app.list_persons
-  when 3
-    app.create_person
-  when 4
-    app.create_book
-  when 5
-    app.create_rental
-  when 6
-    app.person_rentals
-  else
-    puts 'Invalid input. Please try again'
+    selector.selected(option)
   end
 end
 
