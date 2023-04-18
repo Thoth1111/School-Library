@@ -16,8 +16,6 @@ def main
   while menu
     puts menu
     option = gets.chomp.to_i
-    exit if option == 7
-
     selector.selected(option)
   end
 end

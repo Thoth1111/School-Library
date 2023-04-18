@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
@@ -116,5 +117,14 @@ class App
         puts "#{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
       end
     end
+  end
+
+  def save_data
+    book_data = JSON.generate(@books)
+    people_data = JSON.generate(@persons)
+    rental_data = JSON.generate(@rentals)
+    File.write('./saved/books.json', book_data)
+    File.write('./saved/people.json', people_data)
+    File.write('./saved/books.json', rental_data)
   end
 end

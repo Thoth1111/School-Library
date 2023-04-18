@@ -17,6 +17,9 @@ class Selector
       @app.create_rental
     when 6
       @app.person_rentals
+    when 7
+      @app.save_data
+      exit
     else
       puts 'Invalid input. Please try again'
     end
